@@ -12,7 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_leases', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('tenant_name');
+            $table->string('tenant_phone');
+            $table->string('tenant_ktp');
+            $table->string('tenant_image_url');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('due_day_of_month');
+            $table->enum('status', ['completed', 'canceled', 'pending']);
+            $table->text('notes');
             $table->timestamps();
         });
     }

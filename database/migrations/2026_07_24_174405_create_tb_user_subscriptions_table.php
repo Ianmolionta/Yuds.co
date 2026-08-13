@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_user_subscriptions', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->timestamp('starts_at');
+            $table->timestamp('ends_at');
+            $table->string('status');
+            $table->foreignUuid('user_id')->constrained('users');
+            $table->foreignUuid('subscription_plans_id')->constrained('tb_subscription_plans');
             $table->timestamps();
         });
     }

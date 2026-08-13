@@ -12,7 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_invoices', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('invoice_number');
+            $table->decimal('amount', 12,2);
+            $table->date('due_date');
+            $table->enum('status', ['unpaid', 'pending', 'paid', 'overdue', 'canceled']);
+            $table->string('payment_proof_url');
+            $table->timestamp('paid_at');
+            $table->foreignUuid('leases_id')->constrained('tb_leases');
+            $table->foreignUuid('rooms_id')->constrained('tb_rooms');
             $table->timestamps();
         });
     }

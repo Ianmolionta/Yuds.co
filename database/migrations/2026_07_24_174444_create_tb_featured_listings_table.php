@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_featured_listings', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->timestamp('starts_at');
+            $table->timestamp('ends_at');
+            $table->string('status');
+            $table->foreignUuid('properties_id')->constrained('tb_properties');
             $table->timestamps();
         });
     }

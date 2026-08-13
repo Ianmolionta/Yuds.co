@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_expanses', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('tittle');
+            $table->decimal('amount', 12, 2);
+            $table->string('category');
+            $table->date('expanse_date');
+            $table->string('receipt_url');
+            $table->foreignUuid('properties_id')->constrained('tb_properties');
             $table->timestamps();
         });
     }

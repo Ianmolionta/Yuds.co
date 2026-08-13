@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_property_facility_pivot', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('properties_id')->constrained('tb_properties');
+            $table->foreignUuid('properties_facilities_id')->constrained('tb_properties_facilities');
             $table->timestamps();
         });
     }
