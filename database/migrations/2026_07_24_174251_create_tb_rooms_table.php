@@ -12,7 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_rooms', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->string('room_number');
+            $table->decimal('price_mounthly', 12, 2);
+            $table->decimal('price_daily', 12, 2);
+            $table->enum('status', ['avilable', 'occupied', 'maintenance']);
+            $table->string('floor')->default('1');
+            $table->text('description');
+            $table->jsonb('facilities')->nullable();
+            $table->foreignUuid('properties_id')->constrained('tb_properties');
             $table->timestamps();
         });
     }

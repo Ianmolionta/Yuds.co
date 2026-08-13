@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_property_images', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('properties_id')->constrained('tb_properties');
+            $table->string('image_url');
+            $table->boolean('is_primary');
             $table->timestamps();
         });
     }
